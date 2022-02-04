@@ -13,14 +13,14 @@ test('creates an Engineer object', () => {
 
 // gets github from getGithub()
 test('gets engineer github value', () => {
-    const engineer = new Engineer('Will', '24', 'w.york63@gmail.com', 'wyork63');
+    const engineer = new Engineer('Will', 24, 'w.york63@gmail.com', 'wyork63');
 
     expect(engineer.getGithub()).toEqual(expect.stringContaining(engineer.github.toString()));
 });
 
 // gets role from getRole() 
 test('gets role of employee', () => {
-    const engineer = new Engineer('Will', '24', 'w.york63@gmail.com', 'wyork63');
+    const engineer = new Engineer('Will', 24, 'w.york63@gmail.com', 'wyork63');
 
     expect(engineer.getRole()).toEqual("Engineer");
 }); 
