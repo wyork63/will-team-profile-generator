@@ -3,15 +3,17 @@ const generateManager = function (manager) {
     return `
     <div class="col-4 mt-4">
         <div class="card h-100">
-            <div class="card-header bg-dark text-light">
+            <div class="card-header">
                 <h3>${manager.name}</h3>
                 <h4>Manager</h4>
             </div>
+
             <div class="card-body">
                 <p class="id">ID: ${manager.id}</p>
                 <p class="email">Email:<a href="mailto:${manager.email}">${manager.email}</a></p>
                 <p class="office">Office Number: ${manager.officeNumber}</p>
             </div>
+
         </div>
     </div>
     `;
@@ -22,7 +24,7 @@ const generateEngineer = function (engineer) {
     return `
     <div class="col-4 mt-4">
         <div class="card h-100">
-            <div class="card-header bg-dark text-light">
+            <div class="card-header">
                 <h3>${engineer.name}</h3>
                 <h4>Engineer</h4>
             </div>
@@ -31,6 +33,7 @@ const generateEngineer = function (engineer) {
                 <p class="email">Email:<a href="mailto:${engineer.email}">${engineer.email}</a></p>
                 <p class="github">Github: <a href="https://github.com/${engineer.github}">${engineer.github}</a></p>
             </div>
+
         </div>
     </div>
     `
@@ -41,10 +44,11 @@ const generateIntern = function (intern) {
     return `
     <div class="col-4 mt-4">
     <div class="card h-100">
-        <div class="card-header bg-dark text-light">
+        <div class="card-header">
             <h3>${intern.name}</h3>
             <h4>Intern</h4>
         </div>
+
         <div class="card-body">
             <p class="id">ID: ${intern.id}</p>
             <p class="email">Email: <a href="mailto:${intern.email}">${intern.email}</a></p>
@@ -54,6 +58,44 @@ const generateIntern = function (intern) {
 </div>
     `
 };
+
+// push array to page
+generateHTML = (data) => {
+
+    pageArray = []
+
+    for (let i = 0; i < data.length; i++) {
+        const employee = data[i];
+        const role = employee.getRole();
+
+        // call manager 
+        if (role === 'Manager') {
+            const managerCard = generateManager(employee);
+
+            pageArray.push(managerCard);
+        }
+        
+        // call engineer
+        if (role === 'Engineer') {
+            const engineerCard = generateEngineer(employee);
+
+            pageArray.push(engineerCard);
+        }
+        // call intern
+        if (role === 'Intern') {
+            const internCard = generateIntern(employee);
+
+            pageArray.push(internCard);
+        }
+        
+    }
+    //join tg
+    const employeeCards = pageArray.join('')
+
+    // return page
+    const generateTeam = generateTeamPage(employeeCards);
+    return generateTeam;
+}
 
 // generate html page 
 const generateTeamPage = function (employeeCards) {   
@@ -94,48 +136,6 @@ const generateTeamPage = function (employeeCards) {
 `;
 }
 
-// push array to page 
-generateHTML = (data) => {
-
-    // array for cards 
-    pageArray = []; 
-
-    for (let i = 0; i < data.length; i++) {
-        const employee = data[i];
-        const role = employee.getRole(); 
-
-
-        // call manager function
-        if (role === 'Manager') {
-            const managerCard = generateManager(employee);
-
-            pageArray.push(managerCard);
-        }
-
-        // call engineer function
-        if (role === 'Engineer') {
-            const engineerCard = generateEngineer(employee);
-
-            pageArray.push(engineerCard);
-        }
-
-        // call intern function 
-        if (role === 'Intern') {
-            const internCard = generateIntern(employee);
-
-            teamArray.push(internCard);
-        }
-
-    }
-
-    // joining strings 
-    const employeeCards = pageArray.join('')
-
-    // return to generated page
-    const generateTeam = generateTeamPage(employeeCards); 
-    return generateTeam;
-
-}
 
 // export to index
 module.exports = generateHTML; 
