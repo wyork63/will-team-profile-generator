@@ -59,7 +59,7 @@ const addManager = () => {
         },
         {
             type: 'input',
-            name: 'officenumber',
+            name: 'officeNumber',
             message: "What is the manager's officenumber?",
             validate: nameInput => {
                 if (isNaN(nameInput)) {
