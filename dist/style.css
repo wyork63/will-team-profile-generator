@@ -14,27 +14,9 @@ body {
 #navbar {
     background-color: var(--primary);
     color: var(--secondary);
+}
+
+#navbar-text {
     font-size: 50px;
 }
 
-.navbar-brand {
-    font-size: 50px;
-}
-
-
-.card-header {
-    background-color: var(--primary);
-    color: var(--secondary);
-}
-
-.card-body {
-    background-color: var(--secondary);
-    color: var(--primary);
-}
-
-.container {
-    margin: 100px auto;
-    justify-content: space-evenly;
-    display: flex;
-    
-}
