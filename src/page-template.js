@@ -1,6 +1,6 @@
 // create Manager card
-const generateManager = function (manager) {
-    return `
+const buildManagerHtmlCard = function (manager) {
+  return `
     <div class="col-4 mt-4">
         <div class="card h-100">
             <div>
@@ -17,11 +17,11 @@ const generateManager = function (manager) {
         </div>
     </div>
     `;
-}
+};
 
 // create Engineer card
-const generateEngineer = function (engineer) {
-    return `
+const buildEngineerHtmlCard = function (engineer) {
+  return `
     <div class="col-4 mt-4">
         <div class="card h-100">
             <div>
@@ -36,12 +36,12 @@ const generateEngineer = function (engineer) {
 
         </div>
     </div>
-    `
-}
+    `;
+};
 
-// create Intern card 
-const generateIntern = function (intern) {
-    return `
+// create Intern card
+const buildInternHtmlCard = function (intern) {
+  return `
     <div class="col-4 mt-4">
     <div class="card h-100">
         <div>
@@ -56,66 +56,52 @@ const generateIntern = function (intern) {
         </div>
     </div>
 </div>
-    `
+    `;
 };
 
 // push array to page
-generateHTML = (data) => {
+const buildHtml = (data) => {
+  const MANAGER = "Manager";
+  const ENGINEER = "Engineer";
+  const INTERN = "Intern";
 
-    pageArray = []
+  const pageArray = [];
 
-    for (let i = 0; i < data.length; i++) {
-        const employee = data[i];
-        const role = employee.getRole();
+  for (let i = 0; i < data.length; i++) {
+    const employee = data[i];
+    const role = employee.getRole();
 
-        // call manager 
-        if (role === 'Manager') {
-            const managerCard = generateManager(employee);
-
-            pageArray.push(managerCard);
-        }
-
-        // call engineer
-        if (role === 'Engineer') {
-            const engineerCard = generateEngineer(employee);
-
-            pageArray.push(engineerCard);
-        }
-        // call intern
-        if (role === 'Intern') {
-            const internCard = generateIntern(employee);
-
-            pageArray.push(internCard);
-        }
-        
+    if (role === MANAGER) {
+      pageArray.push(buildManagerHtmlCard(employee));
+    } else if (role === ENGINEER) {
+      pageArray.push(buildEngineerHtmlCard(employee));
+    } else if (role === INTERN) {
+      pageArray.push(buildInternHtmlCard(employee));
     }
-    //join tg
-    const employeeCards = pageArray.join('')
+  }
+  const employeeCards = pageArray.join("");
 
-    // return page
-    const generateTeam = generateTeamPage(employeeCards);
-    return generateTeam;
-}
+  const teamPage = buildTeamPage(employeeCards);
+  return teamPage;
+};
 
-// generate html page 
-const generateTeamPage = function (employeeCards) {   
-  return`
+// generate html page
+const buildTeamPage = function (employeeCards) {
+  return `
   <!DOCTYPE html>
   <html lang="en">
   <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Team Profile</title>
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
-      <link href="https://fonts.googleapis.com/css?family=Public+Sans:300i,300,500&display=swap" rel="stylesheet">
-      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+      <title>Team Cards</title>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
       <link rel="stylesheet" href="style.css">
   </head>
   
   <body>
       <header>
           <nav class="navbar" id="navbar">
-              <span class="mb-0 h1 w-100 text-center" id="navbar-text">Team Profile</span>
+              <span class="mb-0 h1 w-100 text-center" id="navbar-text">Team Cards</span>
           </nav>
       </header>
   
@@ -129,13 +115,10 @@ const generateTeamPage = function (employeeCards) {
       
   </body>
   
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
   </html>
 `;
-}
-
+};
 
 // export to index
-module.exports = generateHTML; 
+module.exports = buildHtml;
